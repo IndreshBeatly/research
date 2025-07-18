@@ -5,7 +5,7 @@ from scipy.signal import find_peaks,butter,filtfilt
 
 # 1) Load & clean exactly as before
 df = pd.read_csv(
-    r'C:\Users\Intern\Desktop\bp-new\data\data_138_100.csv',
+    r'C:\Users\Intern\Desktop\bp-new\data\data_122_86.csv',
     skipinitialspace=True
 )
 # 2) Peak detection
@@ -15,7 +15,8 @@ fs_ppg = 50.0
 
 # ECG
 ecg = df['y0000'].values
-ecg = ecg[5000:10000]
+print(ecg)
+ecg = ecg[:5000]
 
 # bandpass filter 
 def butter_bandpass(lowcut,highcut,fs,order=5):
@@ -36,7 +37,7 @@ peaks_ecg, _ = find_peaks(ecg_filtered, distance=min_dist_ecg)
 
 # PPG
 ppg = df['y0001'].values
-ppg = ppg[1500:3000]
+ppg = ppg[:1500]
 lowcut_ppg = 0.5
 highcut_ppg = 8.0
 b,a = butter_bandpass(lowcut_ppg,highcut_ppg,fs_ppg)
